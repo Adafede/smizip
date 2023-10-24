@@ -91,8 +91,8 @@ class NgramManager:
         molecule_counts = collections.defaultdict(int)  # the number of molecules it occurs in
         for smi in smiles:
             mc = set()
-            for start in range(0, len(smi)-2):
-                for end in range(start+2, min(len(smi), start+max_size+1)):
+            for start in range(0, len(smi) - 2):
+                for end in range(start + 2, min(len(smi), start + max_size+ 1 )):
                     ngram = smi[start:end]
                     counts[ngram] += 1
                     mc.add(ngram)
