@@ -57,7 +57,7 @@ def main():
         decompress(args, zipper)
     else:
         compress(args, zipper)
-    print(f"Elapsed time: {time.time() - t:.1}s")
+    print(f"Elapsed time: {time.time() - t:.1f}s")
 
 if __name__ == "__main__":
     main()
