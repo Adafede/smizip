@@ -155,6 +155,13 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+def infinite_iterator(fname):
+    """Once the file is exhausted, read from the beginning again"""
+    while True:
+        with open(fname) as inp:
+            for line in inp:
+                yield line
+
 class Log:
     def __init__(self, filename=None):
         self.output = None
@@ -198,7 +205,7 @@ def main():
     out.write(f"The initial list of multi-char ngrams is:\n  {multichars}\n")
 
     orig_num_ngrams = len(singlechars)
-    smiles_iter = open(args.input)
+    smiles_iter = infinite_iterator(args.input)
 
     if args.speed == "slow":
         NUM_SMILES_TO_TEST, DELTA_TO_TEST = 1000, 45
