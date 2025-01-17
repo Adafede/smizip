@@ -29,11 +29,17 @@ def compress(args, zipper):
     out = open(args.output, "wb") if args.output else sys.stdout.buffer
     with open(args.input) as inp:
         for line in inp:
-            smi, title = line.split(maxsplit=1)
-            zipped = zipper.zip(smi)
-            out.write(zipped)
-            out.write(b"\t")
-            out.write(title.encode("ascii"))
+            broken = line.split(maxsplit=1)
+            if len(broken) == 1:
+                smi = broken[0]
+                zipped = zipper.zip(smi.rstrip())
+                out.write(zipped)
+                out.write(b'\n')
+            else:
+                smi, title = broken
+                zipped = zipper.zip(smi)
+                out.write(b"\t")
+                out.write(title.encode("ascii"))
 
 def main():
     args = parse_args()
