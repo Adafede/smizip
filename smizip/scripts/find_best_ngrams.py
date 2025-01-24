@@ -148,8 +148,7 @@ def parse_args():
     parser.add_argument("--tab", action="store_true", help="Include TAB as an ngram")
     parser.add_argument("--space", action="store_true", help="Include SPACE as an ngram")
     parser.add_argument("--lf", action="store_true", help="Include \\n (line-feed) as an ngram")
-    parser.add_argument("--non-printable", action="store_true", help="Include all other non-printable characters as ngrams")
-
+    parser.add_argument("--non-printable", action="store_true", help="Include all other non-printable characters as ngrams. This is useful (in combination with the --zero and --lf options) to ensure that the generated zipped strings do not contain any control characters or characters outside the ASCII printable set.")
     parser.add_argument("--speed", default="slow", help="Specify one of fast, medium, slow (default). A faster search is less thorough in its testing of n-grams and will result in poor compression")
 
     args = parser.parse_args()
