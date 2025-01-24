@@ -4,6 +4,9 @@ from typing import List
 import collections
 import ahocorasick
 
+class UnknownCharacter(Exception):
+    pass
+
 class SmiZip():
     def __init__(self, multigrams: List[str]) -> None:
         """Requires a list of N multigrams (N<=256) corresponding to bytes 0->N"""
@@ -67,9 +70,18 @@ class SmiZip():
             multigrams.append(multigram)
             i -= len(multigram)
         multigrams.reverse()
-        if format == 0:
-            return bytes(self.lookup[multigram] for multigram in multigrams)
-        elif format == 1:
-            return multigrams
-        else:
-            return [self.lookup[multigram] for multigram in multigrams]
+        try:
+            if format == 0:
+                return bytes(self.lookup[multigram] for multigram in multigrams)
+            elif format == 1:
+                return multigrams
+            else:
+                return [self.lookup[multigram] for multigram in multigrams]
+        except KeyError as e:
+            if len(multigram) == 1:
+                raise UnknownCharacter(f"""The character '{multigram}' is in the SMILES string '{text}' but is not present
+as a single character in the provided JSON file. To fix this, you need to generate a JSON file that includes '{multigram}'.
+You can do this using find_best_ngrams.py by including '{multigram}' in the list of characters passed to --chars.
+Alternatively, you can adjust an existing JSON file using add_char_to_ngrams.py and the --chars option.""")
+            else:
+                raise e
