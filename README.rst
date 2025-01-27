@@ -11,7 +11,9 @@ This work was presented at the 12th RDKit UGM in Mainz in Sep 2023:
 https://github.com/SoseiHeptares/presentations/blob/main/2023/2023-09-12thRDKitUGM_NoelOBoyle_SmiZip.pdf
 
 Note that the more recent 'smaz' (https://github.com/antirez/smaz) short string compression algorithm (2009) is equivalent in concept, but
-favours a greedy approach over an optimal encoding.
+favours a greedy approach over an optimal encoding. This was tweaked for SMILES by Andrew Dalke as 'smilez'; a Python 3 port by
+David Lorenzana can be found at https://github.com/davidlorenzana/smilez. Another more recent paper describes
+ZSMILES (2024, https://arxiv.org/abs/2404.19391), which seems very similar.
 
 Quick start
 -----------
@@ -28,6 +30,8 @@ Now let's use this to compress and decompress a .smi file that contains canonica
 
   smizip    -i test.smi  -o test.smiz  -n rdkit.slow.json
   smizip -d -i test.smiz -o test.2.smi -n rdkit.slow.json
+
+Note that the expected format of a .smi file is ``[SMILES][tab][TITLE]\n``.
 
 Other example sets of n-grams are available from the GitHub site (https://github.com/SoseiHeptares/smizip/tree/main/example-ngrams).
 To create your own JSON file of n-grams, you can train on a dataset (``find_best_ngrams``), or modify
