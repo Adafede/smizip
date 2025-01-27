@@ -3,7 +3,6 @@ import csv
 import sys
 import time
 from io import StringIO
-import pickle
 import json
 import argparse
 import collections
@@ -120,7 +119,8 @@ class NgramManager:
         """
         for ngram in self.counts.keys():
             val, is_measured = self.values.get(ngram, (0, False))
-            if is_measured: continue
+            if is_measured:
+                continue
             if val == 0 or latest in ngram:
                 self.values[ngram] = (length_after_compression([ngram], singlechars, multichars) - 1, False)
 
@@ -128,7 +128,8 @@ class NgramManager:
         """Yield ngrams in order of value"""
         tmp = []
         for ngram, count in self.counts.items():
-            if ngram in chosen_ngrams: continue
+            if ngram in chosen_ngrams:
+                continue
             val, is_measured = self.values[ngram]
             tmp.append( (ngram, val, is_measured, val*count) )
         tmp.sort(reverse=True, key=lambda x:x[3])
@@ -143,7 +144,7 @@ def parse_args():
     parser.add_argument("-o", "--output", help="JSON file into which to save the list of 256 ngrams", required=True)
     parser.add_argument("-l", "--log", help="Write the log to a file. Note that it will still be written to stdout.", default=None)
     parser.add_argument("--chars", help=f"A list of all the characters that will be present in the SMILES string to be encoded. A reasonable default is \"{''.join(sorted(DEFAULT_LIST)).replace('%', '%%')}\" but you should check this for yourself, or trim it if it has too many characters. The fewer characters in this list, the more that will be available for n-gram compression.", required=True)
-    parser.add_argument("--multigrams", help=f"Provide a comma-separated list of additional ngrams to include. This is parsed using Python's CSV reader.")
+    parser.add_argument("--multigrams", help="Provide a comma-separated list of additional ngrams to include. This is parsed using Python's CSV reader.")
     parser.add_argument("--zero", action="store_true", help="Include \\0 as an ngram")
     parser.add_argument("--tab", action="store_true", help="Include TAB as an ngram")
     parser.add_argument("--space", action="store_true", help="Include SPACE as an ngram")
