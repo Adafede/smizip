@@ -1,6 +1,6 @@
 [project]
 name = "smizip"
-version = "1.0.1"
+version = "2.0.0"
 description = "An implementation of Roger Sayle's SmiZip algorithm for compressing short strings"
 readme = "README.rst"
 dependencies = [
@@ -10,7 +10,7 @@ license = { file = "LICENSE" }
 keywords = [ "chemistry", "cheminformatics", "SMILES", "compression", "zip" ]
 
 [project.urls]
-Homepage = "https://github.com/SoseiHeptares/smizip"
+Homepage = "https://github.com/baoilleach/smizip"
 
 [project.scripts]
 find_best_ngrams = "smizip.scripts.find_best_ngrams:main"
