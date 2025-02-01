@@ -38,6 +38,7 @@ def compress(args, zipper):
             else:
                 smi, title = broken
                 zipped = zipper.zip(smi)
+                out.write(zipped)
                 out.write(b"\t")
                 out.write(title.encode("ascii"))
 
