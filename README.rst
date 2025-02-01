@@ -8,7 +8,7 @@ https://www.daylight.com/meetings/mug01/Sayle/SmiZip/index.htm
 
 This repo is an implementation Noel O'Boyle of the SmiZip algorithm in Python.
 This work was presented at the 12th RDKit UGM in Mainz in Sep 2023:
-https://github.com/SoseiHeptares/presentations/blob/main/2023/2023-09-12thRDKitUGM_NoelOBoyle_SmiZip.pdf
+https://github.com/baoilleach/smizip/blob/main/2023-09-12thRDKitUGM_NoelOBoyle_SmiZip.pdf
 
 Note that the more recent 'smaz' (https://github.com/antirez/smaz) short string compression algorithm (2009) is equivalent in concept, but
 favours a greedy approach over an optimal encoding. This was tweaked for SMILES by Andrew Dalke as 'smilez'; a Python 3 port by
